@@ -1,4 +1,6 @@
-## Python script to download all german Springer books released for free during the 2020 COVID-19 quarantine
+## Add multithread spport by python 3.2+ concurrent.futures lib
+
+## Python script to download all english Springer books released for free during the 2020 COVID-19 quarantine
 
 ### Usage
 
