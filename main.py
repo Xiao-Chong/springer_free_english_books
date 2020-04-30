@@ -36,7 +36,7 @@ def GetList(books):
         final = title.replace(',','-').replace('.','').replace('/',' ').replace(':',' ') + ' - ' + author.replace(',','-').replace('.','').replace('/',' ').replace(':',' ') + ' - ' + final
         output_file = new_folder+final
         aList[url2] = output_file
-        
+        #download epub version too if exists
         url3 = url.replace('http://doi.org/','https://link.springer.com/download/epub/')
         url3 = url3 + '.epub'
         final = url3.split('/')[-1]
@@ -65,9 +65,8 @@ aList = GetList(books)
 for item in tqdm(aList.items()):
     GetBook(item)
 '''
-# We can use a with statement to ensure threads are cleaned up promptly
+
 with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
-    # Start the load operations and mark each future with its URL
     future_to_url = {executor.submit(GetBook, item): item[0] for item in aList.items()}
     for future in tqdm(concurrent.futures.as_completed(future_to_url),total=len(future_to_url)):
         url = future_to_url[future]
